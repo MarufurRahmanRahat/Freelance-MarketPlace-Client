@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-import { Code, Palette, Megaphone, Video, PenTool, Database, Shield, Users, Zap, TrendingUp, Award, Clock } from 'lucide-react';
+import { Code, Palette, Megaphone, Video, PenTool, Database } from 'lucide-react';
 
 
 const Static2 = () => {
