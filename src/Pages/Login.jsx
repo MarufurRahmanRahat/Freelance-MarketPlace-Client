@@ -94,7 +94,7 @@ const Login = () => {
                               
                                 <div>
                                     <Link 
-                                        to='/forgetpassword' 
+                                        // to='/forgetpassword' 
                                         state={{ email: email }}  
                                         className="link link-hover"
                                     >
