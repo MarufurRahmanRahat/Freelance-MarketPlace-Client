@@ -279,55 +279,8 @@ const LatestJobs = () => {
           </motion.div>
         )}
 
-        {/* Stats Section */}
-        {jobs.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
-            <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 200 }}
-                className="text-4xl font-bold text-indigo-600 mb-2"
-              >
-                {jobs.length}
-              </motion.div>
-              <p className="text-gray-600 font-semibold">Latest Jobs Posted</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
-                className="text-4xl font-bold text-purple-600 mb-2"
-              >
-                24/7
-              </motion.div>
-              <p className="text-gray-600 font-semibold">Active Platform</p>
-            </div>
-
-            <div className="bg-white rounded-xl p-6 shadow-lg text-center">
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-                className="text-4xl font-bold text-pink-600 mb-2"
-              >
-                100%
-              </motion.div>
-              <p className="text-gray-600 font-semibold">Verified Jobs</p>
-            </div>
-          </motion.div>
-        )}
+      
+       
       </div>
     </section>
   );

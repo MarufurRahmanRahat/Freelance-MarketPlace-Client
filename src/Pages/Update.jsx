@@ -81,7 +81,7 @@ const Update = () => {
         setUpdating(true);
 
         try {
-            const response = await fetch(`http://localhost:3000/updateJob/${jobId}`, {
+            const response = await fetch(`http://localhost:3000/updateJob/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -101,10 +101,9 @@ const Update = () => {
                     }
                 });
 
-                // Navigate back or to my posted jobs
                 setTimeout(() => {
-                    console.log('Navigate to /myPostedJobs');
-                    // window.location.href = '/myPostedJobs';
+                    navigate('/my-posted-job');
+                    
                 }, 2000);
             } else {
                 toast.error('Failed to update job. Please try again.');
@@ -291,19 +290,7 @@ const Update = () => {
                             )}
                         </motion.div>
 
-                        {/* Info Box - Read-only fields */}
-                        <motion.div variants={itemVariants}>
-                            <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
-                                <p className="text-sm text-blue-800 font-semibold mb-2">
-                                    ℹ️ Read-only Information
-                                </p>
-                                <div className="space-y-1 text-sm text-blue-700">
-                                    <p><strong>Posted By:</strong> {originalJob.postedBy}</p>
-                                    <p><strong>Email:</strong> {originalJob.userEmail}</p>
-                                    <p><strong>Posted Date:</strong> {new Date(originalJob.postedDate).toLocaleDateString()}</p>
-                                </div>
-                            </div>
-                        </motion.div>
+                        
 
                         {/* Action Buttons */}
                         <motion.div

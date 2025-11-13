@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Briefcase, User, Tag, FileText, Image, Mail, Calendar } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from '../Contexts/AuthContext';
+import { useLocation, useNavigation } from 'react-router';
 
 const AddJob = () => {
 
@@ -18,6 +19,8 @@ const AddJob = () => {
   });
 
   const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigation();
 
   const categories = [
     'Web Development',
@@ -41,7 +44,41 @@ const AddJob = () => {
   };
 
    const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
+    
+    
+    if (!formData.title.trim()) {
+      toast.error('Job title is required!', {
+        duration: 3000,
+        position: 'top-center'
+      });
+      return;
+    }
+    
+    if (!formData.category) {
+      toast.error('Please select a category!', {
+        duration: 3000,
+        position: 'top-center'
+      });
+      return;
+    }
+    
+    if (!formData.summary.trim()) {
+      toast.error('Job description is required!', {
+        duration: 3000,
+        position: 'top-center'
+      });
+      return;
+    }
+    
+    if (!formData.coverImage.trim()) {
+      toast.error('Cover image URL is required!', {
+        duration: 3000,
+        position: 'top-center'
+      });
+      return;
+    }
+    
     setLoading(true);
 
      try {
@@ -137,7 +174,8 @@ const AddJob = () => {
           variants={itemVariants}
           className="bg-white rounded-2xl shadow-2xl p-8 md:p-12"
         >
-          <div className="space-y-6">
+          
+          <form onSubmit={handleSubmit} className="space-y-6">
             
             {/* Job Title */}
             <motion.div variants={itemVariants}>
@@ -156,7 +194,7 @@ const AddJob = () => {
               />
             </motion.div>
 
-            {/* Posted By (Read-only) */}
+            
             <motion.div variants={itemVariants}>
               <label className="flex items-center gap-2 text-gray-700 font-semibold mb-2">
                 <User className="w-5 h-5 text-indigo-600" />
@@ -258,8 +296,9 @@ const AddJob = () => {
               variants={itemVariants}
               className="pt-4"
             >
+             
               <motion.button
-                onClick={handleSubmit}
+                type="submit"
                 disabled={loading}
                 whileHover={{ scale: loading ? 1 : 1.02 }}
                 whileTap={{ scale: loading ? 1 : 0.98 }}
@@ -282,34 +321,11 @@ const AddJob = () => {
                 )}
               </motion.button>
             </motion.div>
-          </div>
+          </form>
         </motion.div>
 
-        {/* Info Card */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-8 bg-white rounded-xl p-6 shadow-lg"
-        >
-          <h3 className="font-bold text-lg text-gray-800 mb-3">📝 Tips for posting a job:</h3>
-          <ul className="space-y-2 text-gray-600">
-            <li className="flex items-start gap-2">
-              <span className="text-green-500 font-bold">✓</span>
-              <span>Write a clear and descriptive job title</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-green-500 font-bold">✓</span>
-              <span>Include specific requirements and skills needed</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-green-500 font-bold">✓</span>
-              <span>Add a relevant cover image to attract freelancers</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-green-500 font-bold">✓</span>
-              <span>Mention budget range and expected timeline if possible</span>
-            </li>
-          </ul>
-        </motion.div>
+       
+        
       </motion.div>
     </div>
   );

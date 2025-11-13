@@ -1,9 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Palette, Megaphone, Video, PenTool, Database, Shield, Users, Zap, TrendingUp, Award, Clock } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router';
 
 
 const Static1 = () => {
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleBrowse = () => {
+        navigate(location.state || '/jobs');
+    };
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -137,6 +145,7 @@ const Static1 = () => {
                         className="text-center mt-16"
                     >
                         <motion.button
+                            onClick={handleBrowse}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-10 py-4 rounded-full text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-300"

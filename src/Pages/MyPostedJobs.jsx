@@ -80,13 +80,11 @@ const MyPostedJobs = () => {
   };
 
   const handleViewDetails = (jobId) => {
-    console.log('View job:', jobId);
-    // window.location.href = `/allJobs/${jobId}`;
+  navigate(location.state || `/job-details/${jobId}`);
   };
 
   const handleAddNewJob = () => {
-    console.log('Navigate to /addJob');
-    // window.location.href = '/addJob';
+    navigate(location.state || '/add-job'); 
   };
 
   const formatDate = (dateString) => {
@@ -310,40 +308,7 @@ const MyPostedJobs = () => {
           )}
         </AnimatePresence>
 
-        {/* Info Card */}
-        {jobs.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 shadow-lg"
-          >
-            <h3 className="font-bold text-xl text-gray-800 mb-4 flex items-center gap-2">
-              <AlertCircle className="w-6 h-6 text-blue-600" />
-              Managing Your Jobs
-            </h3>
-            <ul className="space-y-3 text-gray-700">
-              <li className="flex items-start gap-3">
-                <div className="bg-blue-100 p-1 rounded-full mt-1">
-                  <Eye className="w-4 h-4 text-blue-600" />
-                </div>
-                <span><strong>View:</strong> See full details of your job posting</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="bg-indigo-100 p-1 rounded-full mt-1">
-                  <Edit className="w-4 h-4 text-indigo-600" />
-                </div>
-                <span><strong>Edit:</strong> Update job title, category, description, or cover image</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="bg-red-100 p-1 rounded-full mt-1">
-                  <Trash2 className="w-4 h-4 text-red-600" />
-                </div>
-                <span><strong>Delete:</strong> Permanently remove job posting (cannot be undone)</span>
-              </li>
-            </ul>
-          </motion.div>
-        )}
+        
       </div>
     </div>
   );

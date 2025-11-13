@@ -2,6 +2,7 @@ import React, { use, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Contexts/AuthContext';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 const Signin = () => {
 
@@ -12,6 +13,7 @@ const Signin = () => {
     const navigate = useNavigate();
 
     const { createUser, signInWithGoogle, updateUser, user, setUser } = use(AuthContext);
+    const notify = () => toast.success('Registration successful!');
 
     const handleRegister = (event) => {
         event.preventDefault();
@@ -55,7 +57,7 @@ const Signin = () => {
          createUser(email, password)
             .then(result => {
                 // console.log('after creation of a new user', result.user)
-                // notify();
+                notify();
                 updateUser({displayName: name, photoURL: photo})
                 .then(() =>{
                  setUser({...user,displayName: name, photoURL: photo})
@@ -80,7 +82,7 @@ const Signin = () => {
         signInWithGoogle()
         .then(result => {
                 // console.log(result.user);
-                //notify();
+                notify();
                 navigate(location.state || '/');
             })
             .catch(error => {

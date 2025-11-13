@@ -7,12 +7,15 @@ import {
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from '../Contexts/AuthContext';
 import LoadingSpiner from '../Components/LoadingSpiner';
+import { useLocation, useNavigate } from 'react-router';
 
 const AcceptedTask = () => {
 
     const { user } = use(AuthContext);
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
+     const location = useLocation();
+    const navigate = useNavigate(); 
 
      useEffect(() => {
     fetchAcceptedTasks();
@@ -35,7 +38,7 @@ const fetchAcceptedTasks = async () => {
 
    const handleDone = async (taskId) => {
     try {
-      const response = await fetch(`http://localhost:3000/my-accepted-tasks/${taskId}`, {
+      const response = await fetch(`http://localhost:3000/acceptedTask/${taskId}`, {
         method: 'DELETE'
       });
 
@@ -94,6 +97,10 @@ const fetchAcceptedTasks = async () => {
     });
   };
 
+
+  const handleGoBack = () => {
+        navigate(location.state || '/jobs');
+    };
    const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -250,7 +257,7 @@ const fetchAcceptedTasks = async () => {
                 Browse available jobs and start accepting tasks to see them here!
               </p>
               <button
-                onClick={() => console.log('Navigate to /allJobs')}
+                onClick={handleGoBack}
                 className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all duration-300"
               >
                 Browse All Jobs
@@ -259,40 +266,7 @@ const fetchAcceptedTasks = async () => {
           )}
         </AnimatePresence>
 
-        {/* Info Card */}
-        {tasks.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mt-12 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 shadow-lg"
-          >
-            <h3 className="font-bold text-xl text-gray-800 mb-4 flex items-center gap-2">
-              <CheckCircle className="w-6 h-6 text-green-600" />
-              Task Management Tips
-            </h3>
-            <ul className="space-y-3 text-gray-700">
-              <li className="flex items-start gap-3">
-                <div className="bg-green-100 p-1 rounded-full mt-1">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
-                </div>
-                <span><strong>Done:</strong> Mark completed tasks as done to remove them from your list</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="bg-red-100 p-1 rounded-full mt-1">
-                  <X className="w-4 h-4 text-red-600" />
-                </div>
-                <span><strong>Cancel:</strong> Cancel tasks you can no longer complete</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="bg-blue-100 p-1 rounded-full mt-1">
-                  <Briefcase className="w-4 h-4 text-blue-600" />
-                </div>
-                <span><strong>Stay Organized:</strong> Keep track of your active tasks and communicate with job posters</span>
-              </li>
-            </ul>
-          </motion.div>
-        )}
+        
       </div>
     </div>
   );

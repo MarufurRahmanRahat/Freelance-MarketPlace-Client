@@ -267,29 +267,7 @@ const JobDetails = () => {
                             )}
                         </motion.div>
 
-                        {/* Additional Info */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.6 }}
-                            className="mt-8 bg-blue-50 rounded-xl p-6"
-                        >
-                            <h3 className="font-bold text-lg text-gray-800 mb-3">💡 What happens next?</h3>
-                            <ul className="space-y-2 text-gray-700">
-                                <li className="flex items-start gap-2">
-                                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                                    <span>Once accepted, this job will appear in your "My Accepted Tasks" section</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                                    <span>Contact the job poster via email to discuss project details</span>
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                                    <span>Mark the task as "Done" when completed or "Cancel" if needed</span>
-                                </li>
-                            </ul>
-                        </motion.div>
+                        
                     </div>
                 </motion.div>
             </div>

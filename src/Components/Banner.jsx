@@ -2,10 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Briefcase, Users, CheckCircle, ArrowRight, TrendingUp, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router';
 
 
 const Banner = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const slides = [
     {
@@ -60,6 +63,14 @@ const Banner = () => {
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
+
+   const handleBrowse = () => {
+        navigate(location.state || '/jobs');
+    };
+
+     const handleCreate = () => {
+        navigate(location.state || '/add-job');
+    };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -200,6 +211,7 @@ const Banner = () => {
                     className="flex flex-col sm:flex-row gap-4 mb-12"
                   >
                     <motion.button
+                      onClick={handleCreate}
                       variants={buttonVariants}
                       whileHover="hover"
                       whileTap="tap"
@@ -210,6 +222,7 @@ const Banner = () => {
                     </motion.button>
 
                     <motion.button
+                      onClick={handleBrowse}
                       variants={buttonVariants}
                       whileHover="hover"
                       whileTap="tap"

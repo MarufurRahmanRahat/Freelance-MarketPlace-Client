@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../Contexts/AuthContext';
 import { DiSenchatouch } from 'react-icons/di';
@@ -17,6 +17,21 @@ const Navbar = () => {
                 console.log(error)
             })
     }
+
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
+
 
 
 const links = <>
@@ -52,7 +67,6 @@ const links = <>
             </div>
             <div className="navbar-end">
                 <div className="">
-                    {/* <img className='w-12 rounded-full mx-2' src={`${user && user.photoURL }`} referrerPolicy='no-referrer' alt=''></img> */}
                     <div className="dropdown dropdown-hover mr-4 pt-2 ">
                         <div tabIndex={0}  className="outline-none cursor-pointer w-12 rounded-full  ">
                             <img className='w-12 rounded-full ' src={`${user && user.photoURL }`} referrerPolicy='no-referrer' alt=''></img>
@@ -70,7 +84,13 @@ const links = <>
                             <Link className='btn text-[16px]' to='/signup'>SignUp</Link>
                         </>
                 }
+               
             </div>
+             <input
+           onChange={(e) => handleTheme(e.target.checked)}
+           type="checkbox"
+           defaultChecked={localStorage.getItem('theme') === "dark"}
+           className="toggle ml-1"/>
         </div>
     );
 };

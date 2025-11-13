@@ -38,23 +38,23 @@ const router = createBrowserRouter([
             },
             {
                 path: '/update/:id',
-                Component: Update
+               element:<PrivateRoute><Update></Update></PrivateRoute> 
             },
             {
                 path: '/job-details/:id',
-                Component: JobDetails
+                element: <JobDetails></JobDetails>
             },
             {
                 path: '/add-job',
-                Component: AddJob
+               element: <PrivateRoute><AddJob></AddJob></PrivateRoute>
             },
             {
                 path: '/accepted-task',
-                Component: AcceptedTask
+                element: <PrivateRoute><AcceptedTask></AcceptedTask></PrivateRoute>
             },
             {
                 path: '/my-posted-job',
-                Component: MyPostedJobs
+                element: <PrivateRoute><MyPostedJobs></MyPostedJobs></PrivateRoute>
             },
             
 
