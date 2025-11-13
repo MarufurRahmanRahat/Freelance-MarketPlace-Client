@@ -41,8 +41,8 @@ const JobDetails = () => {
 
     const handleAcceptJob = async () => {
        
-        
-        if (job.userEmail === User.email) {
+
+        if (job.userEmail === user.email) {
             toast.error('You cannot accept your own job!', {
                 icon: '🚫',
                 duration: 4000
@@ -57,8 +57,8 @@ const JobDetails = () => {
                 jobTitle: job.title,
                 jobCategory: job.category,
                 postedBy: job.postedBy,
-                acceptedBy: User.email,
-                acceptedByName: User.displayName
+                acceptedBy: user.email,
+                acceptedByName: user.displayName
             };
 
             const response = await fetch('http://localhost:3000/acceptJob', {
