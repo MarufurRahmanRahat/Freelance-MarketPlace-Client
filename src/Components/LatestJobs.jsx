@@ -31,9 +31,7 @@ const LatestJobs = () => {
   };
 
    const handleViewDetails = (jobId) => {
-    // Navigate to job details page
-    console.log('View job:', jobId);
-    // window.location.href = `/allJobs/${jobId}`;
+    navigate(location.state || `/jobs/${jobId}`);
   };
 
 

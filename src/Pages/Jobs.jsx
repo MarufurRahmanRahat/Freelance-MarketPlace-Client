@@ -2,23 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Calendar, User, Tag, Eye, ArrowUpDown } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import LoadingSpiner from '../Components/LoadingSpiner';
 
 
 const Jobs = () => {
 
-    const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
- 
+  const [sortOrder, setSortOrder] = useState('newest');
 
-   useEffect(() => {
+
+  useEffect(() => {
     fetchJobs();
-  }, []);
+  }, [sortOrder]);
 
 
-   const fetchJobs = async () => {
+  const fetchJobs = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/jobs`);
+      const response = await fetch(`http://localhost:3000/jobs?sort=${sortOrder}`);
       const data = await response.json();
       setJobs(data);
     } catch (error) {
@@ -29,13 +31,17 @@ const Jobs = () => {
     }
   };
 
-   const handleViewDetails = (jobId) => {
+  const handleSortChange = () => {
+    setSortOrder(prev => prev === 'newest' ? 'oldest' : 'newest');
+  };
+
+  const handleViewDetails = (jobId) => {
     // Navigate to job details page
     console.log('View job:', jobId);
     // window.location.href = `/allJobs/${jobId}`;
   };
 
-   const formatDate = (dateString) => {
+  const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
@@ -45,7 +51,7 @@ const Jobs = () => {
   };
 
 
-   const containerVariants = {
+  const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -55,7 +61,7 @@ const Jobs = () => {
     }
   };
 
-   const cardVariants = {
+  const cardVariants = {
     hidden: { y: 50, opacity: 0 },
     visible: {
       y: 0,
@@ -69,19 +75,12 @@ const Jobs = () => {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-indigo-600 mx-auto mb-4"></div>
-          <p className="text-xl text-gray-600">Loading jobs...</p>
-        </div>
-      </div>
-    );
+    return <LoadingSpiner></LoadingSpiner>
   }
-    return (
+  return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-4">
       <Toaster />
-      
+
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -96,8 +95,23 @@ const Jobs = () => {
             Browse {jobs.length} freelance opportunities
           </p>
         </motion.div>
+        
 
-       
+        {/* Sort Button */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex justify-end mb-8"
+        >
+          <button
+            onClick={handleSortChange}
+            className="flex items-center gap-2 bg-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-shadow font-semibold text-gray-700"
+          >
+            <ArrowUpDown className="w-5 h-5" />
+            Sort by: {sortOrder === 'newest' ? 'Newest First' : 'Oldest First'}
+          </button>
+        </motion.div>
+
 
         {/* Jobs Grid */}
         <motion.div
