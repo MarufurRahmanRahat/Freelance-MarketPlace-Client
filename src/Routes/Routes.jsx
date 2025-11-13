@@ -40,7 +40,7 @@ const router = createBrowserRouter([
                 Component: Update
             },
             {
-                path: '/job-details',
+                path: '/job-details/:id',
                 Component: JobDetails
             },
             {

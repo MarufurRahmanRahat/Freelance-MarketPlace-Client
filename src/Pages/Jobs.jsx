@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Briefcase, Calendar, User, Tag, Eye, ArrowUpDown } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import LoadingSpiner from '../Components/LoadingSpiner';
+import { useLocation, useNavigate } from 'react-router';
 
 
 const Jobs = () => {
@@ -10,6 +11,8 @@ const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sortOrder, setSortOrder] = useState('newest');
+    const location = useLocation();
+    const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -35,10 +38,8 @@ const Jobs = () => {
     setSortOrder(prev => prev === 'newest' ? 'oldest' : 'newest');
   };
 
-  const handleViewDetails = (jobId) => {
-    // Navigate to job details page
-    console.log('View job:', jobId);
-    // window.location.href = `/allJobs/${jobId}`;
+  const handleViewDetails = (id) => {
+     navigate(location.state || `/job-details/${id}`);
   };
 
   const formatDate = (dateString) => {

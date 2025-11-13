@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Briefcase, Calendar, User, Tag, Eye, ArrowRight, 
-  TrendingUp, Clock 
+import {
+  Briefcase, Calendar, User, Tag, Eye, ArrowRight,
+  TrendingUp, Clock
 } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import LoadingSpiner from './LoadingSpiner';
 
 const LatestJobs = () => {
-    const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
   const navigate = useNavigate();
-   useEffect(() => {
+  useEffect(() => {
     fetchLatestJobs();
   }, []);
 
@@ -30,12 +31,12 @@ const LatestJobs = () => {
     }
   };
 
-   const handleViewDetails = (jobId) => {
-    navigate(location.state || `/jobs/${jobId}`);
+  const handleViewDetails = (id) => {
+    navigate(location.state || `/job-details/${id}`);
   };
 
 
-   const handleViewAllJobs = () => {
+  const handleViewAllJobs = () => {
     navigate(location.state || '/jobs');
   };
 
@@ -44,11 +45,11 @@ const LatestJobs = () => {
     const now = new Date();
     const diffTime = Math.abs(now - date);
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays === 0) return 'Today';
     if (diffDays === 1) return 'Yesterday';
     if (diffDays < 7) return `${diffDays} days ago`;
-    
+
     return date.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
@@ -91,15 +92,15 @@ const LatestJobs = () => {
     }
   };
 
-  if (loading){
-   return <LoadingSpiner></LoadingSpiner>
-  } 
+  if (loading) {
+    return <LoadingSpiner></LoadingSpiner>
+  }
 
 
-    return (
+  return (
     <section className="py-20 px-4 bg-gradient-to-br from-white via-blue-50 to-indigo-50">
       <Toaster />
-      
+
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -119,7 +120,7 @@ const LatestJobs = () => {
             <TrendingUp className="w-5 h-5" />
             Latest Opportunities
           </motion.div>
-          
+
           <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
             Recently Posted Jobs
           </h2>
@@ -142,8 +143,8 @@ const LatestJobs = () => {
                 <motion.div
                   key={job._id}
                   variants={cardVariants}
-                  whileHover={{ 
-                    y: -10, 
+                  whileHover={{
+                    y: -10,
                     boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
                     transition: { duration: 0.3 }
                   }}
