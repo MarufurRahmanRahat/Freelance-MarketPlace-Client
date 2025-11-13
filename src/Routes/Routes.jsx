@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/jobs',
-                Component: Jobs
+                element: <Jobs></Jobs>
             },
             {
                 path: '/update',
@@ -50,6 +50,7 @@ const router = createBrowserRouter([
                 path: '/accepted-task',
                 Component: AcceptedTask
             },
+            
 
 
 

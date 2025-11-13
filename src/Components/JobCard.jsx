@@ -3,7 +3,7 @@ import React from 'react';
 const JobCard = () => {
     return (
         <div>
-            this is jobcard
+            this is jobcard.
         </div>
     );
 };
