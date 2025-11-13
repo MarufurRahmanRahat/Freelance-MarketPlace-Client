@@ -24,6 +24,7 @@ const links = <>
         <li><NavLink className='text-[20px] text-[#363b3f] font-sans' to="/jobs">All Jobs</NavLink></li>
         <li><NavLink className='text-[20px] text-[#363b3f] font-sans' to="/add-job">Add a Job</NavLink></li>
         <li><NavLink className='text-[20px] text-[#363b3f] font-sans' to="/accepted-task">My Accepted Tasks</NavLink></li>
+        <li><NavLink className='text-[20px] text-[#363b3f] font-sans' to="/my-posted-job">My Posted Jobs</NavLink></li>
     </>    
 
     return (
