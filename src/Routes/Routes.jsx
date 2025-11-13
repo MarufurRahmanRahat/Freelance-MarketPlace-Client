@@ -10,6 +10,7 @@ import Update from '../Pages/Update';
 import JobDetails from '../Pages/JobDetails';
 import AddJob from '../Pages/AddJob';
 import AcceptedTask from '../Pages/AcceptedTask';
+import PrivateRoute from './PrivateRoute';
 
 const router = createBrowserRouter([
     {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/jobs',
-                element: <Jobs></Jobs>
+                element:<PrivateRoute><Jobs></Jobs></PrivateRoute> 
             },
             {
                 path: '/update',
